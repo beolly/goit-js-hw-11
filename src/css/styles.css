@@ -10,11 +10,14 @@
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 360px);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 24px;
   list-style: none;
   padding: 0;
   justify-content: center;
+}
+.gallery-item {
+  border: 1px solid #ddd;
 }
 
 .gallery-image {
@@ -23,23 +26,34 @@
   object-fit: cover;
   display: block;
 }
+.info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 12px;
+}
 
+.info p {
+  margin: 0;
+  text-align: center;
+}
 .form {
   background-color: #ffffff;
   padding: 24px 28px;
-  width: 320px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 320px;
+  margin: 12px auto;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  display: flex;
+  display: block;
+  align-items: center;
   gap: 12px;
 }
-.form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+.form-field {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  align-items: center;
 }
-
 .form label {
   display: flex;
   font-size: 14px;
@@ -70,38 +84,33 @@
 .form button:hover {
   background-color: #3b5be0;
 }
-
 .loader {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        position: relative;
-        animation: rotate 1s linear infinite
-      }
-      .loader::before , .loader::after {
-        content: "";
-        box-sizing: border-box;
-        position: absolute;
-        inset: 0px;
-        border-radius: 50%;
-        border: 5px solid #FFF;
-        animation: prixClipFix 2s linear infinite ;
-      }
-      .loader::after{
-        border-color: #FF3D00;
-        animation: prixClipFix 2s linear infinite , rotate 0.5s linear infinite reverse;
-        inset: 6px;
-      }
+  width: 24px;
+  height: 24px;
+  border: 5px dotted #3b5be0;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  left: 25%;
+  animation: rotation 2s linear infinite;
+}
 
-      @keyframes rotate {
-        0%   {transform: rotate(0deg)}
-        100%   {transform: rotate(360deg)}
-      }
-
-      @keyframes prixClipFix {
-          0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
-          25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
-          50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
-          75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
-          100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
-      }
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+    scale: 1;
+  }
+  50% {
+    scale: 0.6;
+  }
+  100% {
+    transform: rotate(360deg);
+    scale: 0.9;
+  }
+}
+.is-hidden {
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+}
